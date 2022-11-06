@@ -89,7 +89,7 @@ int infix_to_postfix(string s){
 }
 int main()
 {
-    string exp = "a+b+c-d*e";
+    string exp = "((a+b)/c)-d";
  
     // Function call
     infix_to_postfix(exp);
