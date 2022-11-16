@@ -81,6 +81,29 @@ public:
             }
         }
     }
+    void insert_specific(int d,int elem){
+        node *temp = new node;
+        node *prev = new node;
+        node *curr = head;   //always initialise curr to head
+        if(head == NULL)
+            cout<<"Empty";
+        else if(head->data == d){
+            temp->data = elem;
+            temp->next = NULL;
+            head->next = temp;
+        }
+        else{
+            while(curr ->next != NULL){
+                if(curr->data ==d){
+                    temp->data = elem;
+                    prev->next = temp;
+                    temp->next = curr;
+                }
+            prev= curr;
+            curr= curr->next; 
+            }
+        }
+    }
     void  reverse(){
         node *first = new node;
         node *prev = NULL;
@@ -113,7 +136,7 @@ int main(){
     L.insert_last(49);
     L.traverse();
     cout<<endl;
-    L.delete_specific(5);
+    L.insert_specific(2100,69);
     // L.reverse();
     L.traverse();
 return 0;
