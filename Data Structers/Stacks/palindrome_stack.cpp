@@ -2,12 +2,12 @@
 #include<iostream>
 #define MAX 10
 using namespace std;
-class stk
+class stack
 {
     int top;
     char str[MAX];
 public:
-    stk()
+    stack()
     {
         top= -1;
     }
@@ -17,7 +17,7 @@ public:
 
 };
 
-char stk:: pop()
+char stack:: pop()
 {
     if(top==-1)
     {
@@ -28,7 +28,7 @@ char stk:: pop()
     return str[top--];
 }
 
-void stk::push(char c)
+void stack::push(char c)
 {
     if (top==MAX-1)
     {
@@ -41,7 +41,7 @@ void stk::push(char c)
 
 
 
- void stk::palindrome()
+ void stack::palindrome()
     {
         char str1[10];
         cout<<"enter a word"<<endl;
@@ -63,7 +63,7 @@ void stk::push(char c)
 
 int main()
 {
-    stk obj;
+    stack obj;
     obj.palindrome();
     return 0;
 }
