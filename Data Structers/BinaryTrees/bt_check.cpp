@@ -1,104 +1,119 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-#define max 50
+#define max 100
 
-
-struct node{
-    char data;
-    node *left;
-    node *right;
+struct Node
+{
+	int data;
+	struct Node* left;
+	struct Node* right;
+	Node (int data)
+	{
+		this->data = data;
+		left = right = NULL;
+	}
 };
-class binarytree{
-
-private:    node *root;
-protected:
-    node* createTree(){
-        char val;
-        cout<<">";
-        cin>>val;
-        if(val=='p')
-            return NULL;
-        node *temp= new node;
-        temp->data=val;   
-        cout<<"Left child of "<<val<<endl;
-        temp->left=createTree();
-        cout<<"Right child of "<<val<<endl;
-        temp->right=createTree();
+class Stacks{
+public:    
+    Node* arr[max];
+    int top;
+    Stacks(){
+        top= -1;
     }
+    bool isempty(){
+        if(top==-1)
+            return true;
+        else 
+            return false;
+    }
+    bool isFull(){
+        if(top == max-1)
+            return true;
+        else    
+            return false;
+    }
+    void push(Node *c){
+        if(isFull())
+            cout<<"Stack is full";
+        else    
+            arr[++top]=c;
+    }
+    Node* pop(){
+        if(isempty())
+            cout<<"Stack is empty";
+        else    
+            return arr[top--];
+    }
+    Node* peek(){
+        return arr[top];
+    }
+
+};
+class bt{
 public:
-    binarytree(){
-        root = NULL;
-    }
-    void create(){
-        cout<<"Use p to break"<<endl;
-        cout<<"Enter root"<<endl;
-        root=createTree();
-    }
-    void IterativePreorder(){
-
-        if(root==NULL)
-            return;
-        stack <node*> s;
-        node *curr=root;
-
-        s.push(curr);
-        while(!s.empty()){
-            curr = s.top();
+    void inOrder( Node *root){
+        Stacks s;
+        Node *curr = root;
+        while (curr != NULL || s.isempty() == false)
+        {
+            while (curr != NULL)
+            {	s.push(curr);
+                curr = curr->left;
+            }
+            curr = s.peek();
             s.pop();
-            cout<<curr->data;
-            if(curr->right){
-                s.push(curr->right);
-            }
-            if(curr->left){
-                s.push(curr->left);
-            }
-        }
-    }
-    void IterativePostorder(){
-        if(root==NULL)
-            return;
-        stack <node*> s1;
-        stack <node*> s2;
-        node *curr=root;
-        node *temp = new node;
-        s1.push(curr);
-        while(!s1.empty()){
-            temp = s1.top();
-            s1.pop();
-            s2.push(temp);
-            if (curr->left)
-                s1.push(curr->left);
-            if (curr->right)
-                s1.push(curr->right);
-        }
-        while (!s2.empty()) {
-            curr = s2.top();
-            s2.pop();
             cout << curr->data << " ";
+            curr = curr->right;
         }
     }
-    void IterativeInorder(){
-        if(root==NULL)
-            return;
-        stack <node*> s;
-        node *curr=root;
+    void preorder(Node* root){
+        Node* curr = root;
+        Stacks s1;
+        s1.push(curr);
+        while(!s1.isempty()){
+            curr = s1.peek();
+            cout << curr->data << " ";
+            s1.pop();
+            if(curr->right)
+                s1.push(curr->right);
+            if(curr->left)
+                s1.push(curr->left);
+        }        
+    }
+    void postorder(Node* root){
+        Node* curr = root;
+        Node* temp;
+        Stacks s2;
+        Stacks s3;
+        s2.push(curr);
+        while(!s2.isempty()){
+            curr = s2.peek();
+            s2.pop();
+            s3.push(curr);
 
-        while(curr!=NULL || !s.empty()){
-            while(curr!=NULL){
-                s.push(curr);
-                curr=curr->left;
-            }
-            curr=s.top();
-            s.pop();
-            cout<<curr->data;
-            curr=curr->right;
+            if(curr->left)
+                s2.push(curr->left); 
+            if(curr->right)
+                s2.push(curr->right);
         }
-        cout<<endl;
+        while(!s3.isempty()){
+            temp = s3.pop();
+            cout<<temp->data;
+        }
     }
 };
-int main(){
-    binarytree bt;
-    bt.create();
-    bt.IterativePreorder();
-    bt.IterativeInorder();
+int main()
+{
+	struct Node *root = new Node(1);
+	root->left	 = new Node(2);
+	root->right	 = new Node(3);
+	root->left->left = new Node(4);
+	root->left->right = new Node(5);
+
+    bt bt;
+	bt.inOrder(root);
+    bt.preorder(root);
+    bt.postorder(root);
+
+	return 0;
 }
