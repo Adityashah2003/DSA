@@ -7,18 +7,16 @@ struct Node{
 };
 
 class DoublyCircular{
-    private:
+private:
     Node *head;
-    public:
+public:
     DoublyCircular(){
         head=NULL;
     }
-
     void insert(int elem){
         Node *temp= new Node;
         Node *curr= new Node;
         temp->data=elem;
-        //EDGE CASE: Empty List
         if(head==NULL){
             head=temp;
             temp->next=head;
@@ -26,18 +24,16 @@ class DoublyCircular{
             return;
         }
         curr=head;
-        int count=0;
         do{
-            curr=curr->next;            
+            curr=curr->next;
         }while(curr!=head);
+        cout<<curr->data;            
 
-        curr->next = temp;
-        temp->next = head;
-        head->prev = temp;
-        temp->prev = curr;
-    
+        curr->prev->next=temp;
+        temp->prev=curr->prev;
+        temp->next=curr;
+        curr->prev=temp;
     }
-    // TODO: ERROR: Deletion doesn't work if elements are less than 2
     void delete_elem(int elem){
         Node *curr= head;
         if(head==NULL){
@@ -50,17 +46,16 @@ class DoublyCircular{
         }
         do{
             if(curr->data==elem){
-                if(curr->prev!= NULL)
+                if(curr->prev)
                     curr->prev->next=curr->next;
-                if(curr->next!= NULL)
+                if(curr->next)
                     curr->next->prev=curr->prev;
-                if(curr==head!=NULL){
+                if(curr==head){
                     head=curr->next;
                 }
                 delete curr;
                 break;
             }
-            curr=curr->next;
         }while(curr!=head);
     }
 
@@ -74,7 +69,6 @@ class DoublyCircular{
         cout<<endl;
     }
 };
-
 
 int main(){
     DoublyCircular DC;

@@ -38,9 +38,6 @@ void stack::push(char c)
     }
     str[++top]=c;
 }
-
-
-
  void stack::palindrome()
     {
         char str1[10];

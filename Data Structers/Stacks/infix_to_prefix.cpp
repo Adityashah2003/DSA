@@ -1,5 +1,4 @@
 #include<iostream>
-#include<locale> //for function isalnum()
 #include<algorithm>
 using namespace std;
 #define max 50
@@ -74,7 +73,7 @@ void infix_prefix(string s){
             s1.pop();
         }
         else{
-            while(!s1.isEmpty()&& pred(c)<=pred(s1.peek())){
+            while(!s1.isEmpty()&& pred(c)<pred(s1.peek())){
                 result += s1.peek();
                 s1.pop();
             }

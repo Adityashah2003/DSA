@@ -16,7 +16,6 @@ public:
     DLL(){
     head = NULL;
     tail = NULL;
-
     }
     void append(int elem){
         node* temp = new node;
@@ -131,19 +130,6 @@ public:
         }   
         head = prevn;
     }
-    // void  reverse(){
-    //     node *temp = new node;
-    //     node *prev = NULL;
-    //     node *curr = head;
-
-    //     while(curr != NULL){
-    //         temp = curr ->next;
-    //         curr ->next=prev;
-    //         prev = curr;
-    //         curr = temp;
-    //     }  
-    //     head = prev;
-    // }
     void traverse(){
     node *temp= new node;
     temp=head;  

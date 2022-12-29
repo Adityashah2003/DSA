@@ -54,10 +54,9 @@ public:
     void inOrder( Node *root){
         Stacks s;
         Node *curr = root;
-        while (curr != NULL || s.isempty() == false)
-        {
-            while (curr != NULL)
-            {	s.push(curr);
+        while (curr != NULL || s.isempty() == false){
+            while (curr != NULL){
+                s.push(curr);
                 curr = curr->left;
             }
             curr = s.peek();

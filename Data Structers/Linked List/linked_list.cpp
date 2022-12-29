@@ -28,7 +28,6 @@ public:
     void insert_last(int elem){
         node *temp = new node;
         node *curr = head;  //imp
-
         temp->next = NULL;
         temp->data = elem;
         if(head == NULL)
